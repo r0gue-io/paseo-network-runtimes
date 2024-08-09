@@ -17,7 +17,7 @@
 
 use crate::common::{get_account_id_from_seed, get_from_seed, testnet_accounts};
 use cumulus_primitives_core::ParaId;
-use parachains_common::{AccountId, AssetHubPolkadotAuraId, AuraId, Balance};
+use parachains_common::{AccountId, AuraId, Balance};
 use sc_chain_spec::{ChainSpec, ChainSpecExtension, ChainSpecGroup, ChainType};
 use serde::{Deserialize, Serialize};
 use sp_core::sr25519;
@@ -52,15 +52,15 @@ pub fn invulnerables() -> Vec<(AccountId, AuraId)> {
 }
 
 /// Invulnerable Collators for the particular case of AssetHubPolkadot
-pub fn invulnerables_asset_hub_paseo() -> Vec<(AccountId, AssetHubPolkadotAuraId)> {
+pub fn invulnerables_asset_hub_paseo() -> Vec<(AccountId, AuraId)> {
 	vec![
 		(
 			get_account_id_from_seed::<sr25519::Public>("Alice"),
-			get_from_seed::<AssetHubPolkadotAuraId>("Alice"),
+			get_from_seed::<AuraId>("Alice"),
 		),
 		(
 			get_account_id_from_seed::<sr25519::Public>("Bob"),
-			get_from_seed::<AssetHubPolkadotAuraId>("Bob"),
+			get_from_seed::<AuraId>("Bob"),
 		),
 	]
 }
@@ -69,7 +69,7 @@ pub fn invulnerables_asset_hub_paseo() -> Vec<(AccountId, AssetHubPolkadotAuraId
 ///
 /// The input must be a tuple of individual keys (a single arg for now since we have just one key).
 pub fn asset_hub_paseo_session_keys(
-	keys: AssetHubPolkadotAuraId,
+	keys: AuraId,
 ) -> asset_hub_paseo_runtime::SessionKeys {
 	asset_hub_paseo_runtime::SessionKeys { aura: keys }
 }
@@ -83,7 +83,7 @@ pub fn bridge_hub_paseo_session_keys(keys: AuraId) -> bridge_hub_paseo_runtime::
 
 // AssetHubPaseo
 fn asset_hub_paseo_genesis(
-	invulnerables: Vec<(AccountId, AssetHubPolkadotAuraId)>,
+	invulnerables: Vec<(AccountId, AuraId)>,
 	endowed_accounts: Vec<AccountId>,
 	id: ParaId,
 ) -> serde_json::Value {
